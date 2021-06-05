@@ -1,0 +1,16 @@
+version: 2.1
+jobs:
+  build:
+    machine:
+      image: "ubuntu-2004:202104-01"
+
+    steps:
+      - checkout
+
+      - run:
+          name: Build image
+          command: make build
+
+      - run:
+          name: Test image
+          command: make test
