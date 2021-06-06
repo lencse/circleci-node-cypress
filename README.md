@@ -12,7 +12,7 @@ Docker images to run [Cypress](https://www.cypress.io/) tests on [Circle CI](htt
 
 ## Usage
 
-Use it like the standard Circle CI Circle CI Node.js images and run cypress with chrome browser.
+Use it like the standard Circle CI Circle CI Node.js images and run Cypress with chrome browser.
 
 ````yml
 # .circleci/config.yml
