@@ -1,4 +1,4 @@
-# lencse/circleci-node-express
+# [lencse/circleci-node-express](https://github.com/lencse/circleci-node-cypress)
 
 [![CircleCI](https://circleci.com/gh/lencse/circleci-node-cypress/tree/main.svg?style=svg)](https://circleci.com/gh/lencse/circleci-node-cypress/tree/main)
 
@@ -32,6 +32,14 @@ jobs:
       - run:
           name: Run E2E tests
           command: `yarn bin`/cypress run --browser chrome --headless
+````
+
+## Check versions
+
+````sh
+$ docker run lencse/circleci-node-cypress:16.3-chrome-91 google-chrome --version && node --version
+Google Chrome 91.0.4472.77 
+v16.2.0
 ````
 
 ## Built tags:
