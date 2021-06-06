@@ -31,11 +31,9 @@ workflows:
           filters:
             branches:
               only: /.*/
-            tags:
-              only: /.*/
       - push:
           requires:
             - build
           filters:
             tags:
-              only: /.*/
+              only: /^tag-.*/
