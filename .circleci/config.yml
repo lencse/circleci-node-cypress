@@ -2,16 +2,20 @@ version: 2.1
 jobs:
   build:
     machine: true
+    environment:
+      DOCKER_SOURCE_TAG: 16.2
     steps:
       - checkout
       - run:
           name: Build image
           command: make build
+    #   - run:
+    #       name: Test image
+    #       command: make test
       - run:
-          name: Test image
-          command: make test
-      - run:
-          name: Push image if on a 'tag-*' branch
+          name: Push image on main branch
           command: |
-            docker login --username $DOCKER_USER --password $(echo "$DOCKER_PASSWORD")
-            [[ "$CIRCLE_BRANCH" =~ ^tag- ]] && DOCKER_IMAGE_TAG=$(echo $CIRCLE_BRANCH | sed "s/^tag-//") make push || echo "No tag provided, not pushing."
+            [[ "$CIRCLE_BRANCH" == "main" ]] && ( \
+                    docker login --username $DOCKER_USER --password $(echo "$DOCKER_PASSWORD") && \
+                    make push \
+                ) || echo "Not pushing, because curret branch is not 'main'"
