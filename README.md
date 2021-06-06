@@ -34,7 +34,7 @@ jobs:
           command: `yarn bin`/cypress run --browser chrome --headless
 ````
 
-## Check versions
+## Check installed versions:
 
 ````sh
 ; docker run lencse/circleci-node-cypress:16.3-chrome-91 google-chrome --version                  
