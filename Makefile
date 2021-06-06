@@ -6,7 +6,7 @@ build:
 	docker build -t ${DOCKER_IMAGE_NAME} .
 
 test:
-	docker run -it -v `pwd`:/build ${DOCKER_IMAGE_NAME} /build/verify-cypress.sh
+	docker run -it -v `pwd`/test:/build ${DOCKER_IMAGE_NAME} /build/verify-cypress.sh
 
 push:
 	[ ! -z "$(DOCKER_IMAGE_TAG)" ] && \
