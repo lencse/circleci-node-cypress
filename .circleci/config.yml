@@ -14,4 +14,4 @@ jobs:
       - run:
           name: Push image if on a 'tag-*' branch
           command: |
-            [ ! -z "$CIRCLE_BRANCH" ] && DOCKER_IMAGE_TAG=$(echo $CIRCLE_BRANCH | sed "s/^tag-//") make push
+            [ ! -z "$CIRCLE_BRANCH" ] && DOCKER_IMAGE_TAG=$(echo $CIRCLE_BRANCH | sed "s/^tag-//") make push || echo "No tag provided, not pushing."
