@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 cp -R /build/* .
 
 yarn install --immutable
