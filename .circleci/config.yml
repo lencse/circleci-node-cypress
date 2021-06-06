@@ -19,10 +19,22 @@ jobs:
       - run:
           name: Push image on main branch
           command: |
-            [[ "$CIRCLE_BRANCH" == "main" ]] && ( \
-                    docker login --username $DOCKER_USER --password $(echo "$DOCKER_PASSWORD") && \
-                    make push \
-                ) || echo "Not pushing, because curret branch is not 'main'"
+            [[ "$CIRCLE_BRANCH" == "main" ]] && \
+                make push || \
+                echo "Not pushing, because curret branch is not 'main'"
+  post_build:
+    machine: true
+    steps:
+      - checkout
+    #   - run:
+    #       name: Test image
+    #       command: make test
+      - run:
+          name: Push README do docker hub
+          command: |
+            [[ "$CIRCLE_BRANCH" == "main" ]] && \
+                make push_readme_to_dockerhub || \
+                echo "Not pushing, because curret branch is not 'main'"
 
 workflows:
   default:
@@ -37,6 +49,9 @@ workflows:
                 - "16.2-browsers"
                 - "14.17"
                 - "14.17-browsers"
+      - post_build:
+          requires:
+            - build
   scheduled:
     jobs:
       - build:
