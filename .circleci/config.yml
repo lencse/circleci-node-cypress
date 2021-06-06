@@ -3,14 +3,38 @@ jobs:
   build:
     machine:
       image: "ubuntu-2004:202104-01"
-
     steps:
       - checkout
-
       - run:
           name: Build image
           command: make build
-
       - run:
           name: Test image
           command: make test
+  push:
+    machine:
+      image: "ubuntu-2004:202104-01"
+    steps:
+      - checkout
+      - run:
+          name: Build image
+          command: make build
+      - run:
+          name: Push image
+          command: make test
+
+workflows:
+  version: 2
+  build_and_push:
+    jobs:
+      - build:
+          filters:
+            branches
+            tags:
+              only: /.*/
+      - push:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
