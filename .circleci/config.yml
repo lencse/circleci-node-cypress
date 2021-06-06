@@ -1,9 +1,13 @@
 version: 2.1
+
 jobs:
   build:
     machine: true
+    parameters:
+      docker_source_tag:
+        type: string
     environment:
-      DOCKER_SOURCE_TAG: 16.2
+      DOCKER_SOURCE_TAG: <<parameters.docker_source_tag>>
     steps:
       - checkout
       - run:
@@ -19,3 +23,11 @@ jobs:
                     docker login --username $DOCKER_USER --password $(echo "$DOCKER_PASSWORD") && \
                     make push \
                 ) || echo "Not pushing, because curret branch is not 'main'"
+
+workflows:
+  default:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              docker_source_tag: ["16.2"]
