@@ -13,16 +13,16 @@ jobs:
       - run:
           name: Build image
           command: make build
-    #   - run:
-    #       name: Test image
-    #       command: make test
+      - run:
+          name: Test image
+          command: make test
       - run:
           name: Push image on main branch
           command: |
             [[ "$CIRCLE_BRANCH" == "main" ]] && \
                 make push || \
-                echo "Not pushing, because curret branch is not 'main'"
-  post_build:
+                echo "Not pushing, because current branch is not 'main'"
+  post_process:
     machine: true
     steps:
       - checkout
@@ -34,7 +34,7 @@ jobs:
           command: |
             [[ "$CIRCLE_BRANCH" == "main" ]] && \
                 make push_readme_to_dockerhub || \
-                echo "Not pushing, because curret branch is not 'main'"
+                echo "Not pushing, because current branch is not 'main'"
 
 workflows:
   default:
@@ -49,7 +49,7 @@ workflows:
                 - "16.2-browsers"
                 - "14.17"
                 - "14.17-browsers"
-      - post_build:
+      - post_process:
           requires:
             - build
   scheduled:
@@ -64,6 +64,9 @@ workflows:
                 - "16.2-browsers"
                 - "14.17"
                 - "14.17-browsers"
+      - post_process:
+          requires:
+            - build
     triggers:
       - schedule:
           cron: "0 0 1 * *"
