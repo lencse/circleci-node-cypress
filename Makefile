@@ -21,11 +21,13 @@ push: .chrome_version
 		(echo "\n---\nError: DOCKER_SOURCE_TAG env var is not set\n---" && exit 1)
 
 Dockerfile: Dockerfile.template
-	[ ! -z "$(DOCKER_SOURCE_TAG)" ] && \
-		cat Dockerfile.template| sed "s@FROM ${DOCKER_SOURCE_IMAGE_NAME}@FROM ${DOCKER_SOURCE_IMAGE_NAME}:${DOCKER_SOURCE_TAG}@" > Dockerfile || \
-		(echo "\n---\nError: DOCKER_SOURCE_TAG env var is not set\n---" && exit 1)
+	cp Dockerfile.template Dockerfile
+# [ ! -z "$(DOCKER_SOURCE_TAG)" ] && \
+# 	cat Dockerfile.template| sed "s@FROM ${DOCKER_SOURCE_IMAGE_NAME}@FROM ${DOCKER_SOURCE_IMAGE_NAME}:${DOCKER_SOURCE_TAG}@" > Dockerfile || \
+# 	(echo "\n---\nError: DOCKER_SOURCE_TAG env var is not set\n---" && exit 1)
 
 .chrome_version: Dockerfile
 	docker build -t ${DOCKER_IMAGE_NAME} .
-	docker run ${DOCKER_IMAGE_NAME} google-chrome --version | \
-		sed "s/^Google Chrome \([^.]*\).*/CHROME_VERSION=\\1/" > .chrome_version
+	echo "CHROME_VERSION=0" > .chrome_version
+# docker run ${DOCKER_IMAGE_NAME} google-chrome --version | \
+# 	sed "s/^Google Chrome \([^.]*\).*/CHROME_VERSION=\\1/" > .chrome_version
