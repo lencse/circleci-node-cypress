@@ -7,9 +7,9 @@ jobs:
       - run:
           name: Build image
           command: make build
-    #   - run:
-    #       name: Test image
-    #       command: make test
+      - run:
+          name: Test image
+          command: make test
       - run:
           name: Push image if on a 'tag-*' branch
           command: |
