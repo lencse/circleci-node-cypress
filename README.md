@@ -37,9 +37,13 @@ jobs:
 ## Check versions
 
 ````sh
-$ docker run lencse/circleci-node-cypress:16.3-chrome-91 google-chrome --version && node --version
-Google Chrome 91.0.4472.77 
-v16.2.0
+; docker run lencse/circleci-node-cypress:16.3-chrome-91 google-chrome --version                  
+
+# Google Chrome 91.0.4472.77 
+
+; docker run lencse/circleci-node-cypress:16.3-chrome-91 node --version  
+
+#v16.3.0
 ````
 
 ## Built tags:
