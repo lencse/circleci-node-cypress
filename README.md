@@ -1,6 +1,7 @@
-# [lencse/circleci-node-express](https://github.com/lencse/circleci-node-cypress)
+# [lencse/circleci-node-express](https://github.com/lencse/circleci-node-cypress) [![GitHub](https://img.shields.io/badge/github-repo-brightgreen?style=flat&logo=github)](https://github.com/lencse/circleci-node-cypress)
 
 [![CircleCI](https://circleci.com/gh/lencse/circleci-node-cypress/tree/main.svg?style=svg)](https://circleci.com/gh/lencse/circleci-node-cypress/tree/main)
+
 
 Docker images to run [Cypress](https://www.cypress.io/) tests on [Circle CI](https://circleci.com/).
 
