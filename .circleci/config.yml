@@ -1,8 +1,7 @@
 version: 2.1
 jobs:
   build:
-    machine:
-      image: "ubuntu-2004:202104-01"
+    machine: true
     steps:
       - checkout
       - run:
@@ -14,4 +13,5 @@ jobs:
       - run:
           name: Push image if on a 'tag-*' branch
           command: |
-            [ ! -z "$CIRCLE_BRANCH" ] && DOCKER_IMAGE_TAG=$(echo $CIRCLE_BRANCH | sed "s/^tag-//") make push || echo "No tag provided, not pushing."
+            echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+            [[ "$CIRCLE_BRANCH" =~ ^tag- ]] && DOCKER_IMAGE_TAG=$(echo $CIRCLE_BRANCH | sed "s/^tag-//") make push || echo "No tag provided, not pushing."
