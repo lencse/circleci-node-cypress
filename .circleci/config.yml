@@ -31,9 +31,28 @@ workflows:
           matrix:
             parameters:
               docker_source_tag:
-                - "16.2."
-                - "16.2-browsers"
                 - "16.3"
                 - "16.3-browsers"
+                - "16.2."
+                - "16.2-browsers"
                 - "14.17"
                 - "14.17-browsers"
+  scheduled:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              docker_source_tag:
+                - "16.3"
+                - "16.3-browsers"
+                - "16.2."
+                - "16.2-browsers"
+                - "14.17"
+                - "14.17-browsers"
+    triggers:
+      - schedule:
+          cron: "0 0 1 * *"
+          filters:
+            branches:
+              only:
+                - main
