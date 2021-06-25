@@ -1,4 +1,4 @@
-.PHONY: build test push push_readme_to_dockerhub
+.PHONY: build test push push_readme_to_dockerhub version_info
 
 ifneq (,$(wildcard ./.chrome_version))
     include .chrome_version
@@ -37,3 +37,7 @@ push_readme_to_dockerhub:
 		-e DOCKERHUB_REPOSITORY=${DOCKER_IMAGE_NAME} \
 		-e README_FILEPATH='/workspace/README.md' \
 		peterevans/dockerhub-description:2
+
+version_info: .chrome_version
+	docker run ${DOCKER_IMAGE_NAME} google-chrome --version
+	docker run ${DOCKER_IMAGE_NAME} node --version

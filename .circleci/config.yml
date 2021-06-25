@@ -14,6 +14,9 @@ jobs:
           name: Build image
           command: make build
       - run:
+          name: Print Chrome and Node.js versions
+          command: make version_info
+      - run:
           name: Test image
           command: make test
       - run:
@@ -26,9 +29,6 @@ jobs:
     machine: true
     steps:
       - checkout
-    #   - run:
-    #       name: Test image
-    #       command: make test
       - run:
           name: Push README do docker hub
           command: |
