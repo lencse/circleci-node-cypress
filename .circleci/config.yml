@@ -44,11 +44,8 @@ workflows:
             parameters:
               docker_source_tag:
                 - "16.3"
-                - "16.3-browsers"
                 - "16.2"
-                - "16.2-browsers"
                 - "14.17"
-                - "14.17-browsers"
       - post_process:
           requires:
             - build
@@ -59,11 +56,8 @@ workflows:
             parameters:
               docker_source_tag:
                 - "16.3"
-                - "16.3-browsers"
                 - "16.2."
-                - "16.2-browsers"
                 - "14.17"
-                - "14.17-browsers"
       - post_process:
           requires:
             - build
